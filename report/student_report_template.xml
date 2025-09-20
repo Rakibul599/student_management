@@ -1,0 +1,44 @@
+<odoo>
+    <template id="student_specific_course_enrolled" name="Course Report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <pre>
+=====================================================
+                 Course Report
+=====================================================
+
+Course: <t t-esc="doc.name"/> (<t t-esc="doc.code"/>)
+Credit Hours: <t t-esc="doc.credit"/>
+
+Enrolled Students:
+------------------
+<t t-if="doc.student_ids">
+    <t t-foreach="enumerate(doc.student_ids)" t-as="pair">
+        <t t-set="i" t-value="pair[0]"/>
+        <t t-set="student" t-value="pair[1]"/>
+<t t-esc="i + 1"/>. <t t-esc="student.name"/> (Roll: <t t-esc="student.roll_no"/>, Department: <t t-esc="student.department"/>)
+    </t>
+</t>
+<t t-else="">
+No students enrolled in this course.
+</t>
+</pre>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="student_specific_course_enrolled_template" model="ir.actions.report">
+        <field name="name">Student course enrolled report</field>
+        <field name="model">course.management</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">student_management.student_specific_course_enrolled</field>
+        <field name="report_file">student_management.student_specific_course_enrolled</field>
+        <field name="print_report_name">'student-course-enrolled'</field>
+        <field name="binding_model_id" ref="model_course_management" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

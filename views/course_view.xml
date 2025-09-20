@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="course_form_view" model="ir.ui.view">
+        <field name="name">Courses</field>
+        <field name="model">course.management</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="code" />
+                        <field name="credit" />
+                        <!-- <field name="student_ids"/> -->
+                    </group>
+                    <notebook>
+                        <page string="Enrolled Students">
+                            <field name="student_ids" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="course_list_view" model="ir.ui.view">
+        <field name="name">All Course</field>
+        <field name="model">course.management</field>
+        <field name="arch" type="xml">
+            <list string="All Students">
+                <field name="name" />
+                <field name="code" />
+                <field name="credit" />
+
+            </list>
+        </field>
+    </record>
+
+    <record id="course_action_view" model="ir.actions.act_window">
+        <field name="name">Course Action</field>
+        <field name="res_model">course.management</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p>
+                Please enter your course info.
+            </p>
+        </field>
+    </record>
+
+</odoo>
